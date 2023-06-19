@@ -1,0 +1,116 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "VisualEditor0",
+            "Effect": "Allow",
+            "Action": [
+                "ec2:CreateLaunchTemplate",
+                "eks:UntagResource",
+                "eks:TagResource",
+                "ecr:*",
+                "ec2:CreateLaunchTemplateVersion"
+            ],
+            "Resource": [
+                "arn:aws:ecr:*:599151311607:repository/*",
+                "arn:aws:eks:*:599151311607:cluster/*",
+                "arn:aws:ec2:*:599151311607:launch-template/*"
+            ]
+        },
+        {
+            "Sid": "VisualEditor1",
+            "Effect": "Allow",
+            "Action": [
+                "ecr:GetRegistryPolicy",
+                "eks:DescribeAddonConfiguration",
+                "ec2:DescribeLaunchTemplates",
+                "ecr:CreateRepository",
+                "ec2:DescribeLaunchTemplateVersions",
+                "ecr:DescribeRegistry",
+                "ecr:DescribePullThroughCacheRules",
+                "ecr:GetAuthorizationToken",
+                "ecr:PutRegistryScanningConfiguration",
+                "ecr:CreatePullThroughCacheRule",
+                "ecr:DeletePullThroughCacheRule",
+                "ecr:PutRegistryPolicy",
+                "ecr:GetRegistryScanningConfiguration",
+                "ecr:BatchImportUpstreamImage",
+                "eks:DescribeAddonVersions",
+                "ecr:DeleteRegistryPolicy",
+                "eks:CreateCluster",
+                "ecr:PutReplicationConfiguration"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "VisualEditor2",
+            "Effect": "Allow",
+            "Action": [
+                "eks:DeleteCluster",
+                "ec2:RunInstances",
+                "eks:DescribeCluster"
+            ],
+            "Resource": [
+                "arn:aws:elastic-inference:*:599151311607:elastic-inference-accelerator/*",
+                "arn:aws:ec2:*:599151311607:elastic-gpu/*",
+                "arn:aws:ec2:*:599151311607:subnet/*",
+                "arn:aws:ec2:*:599151311607:volume/*",
+                "arn:aws:ec2:*:599151311607:placement-group/*",
+                "arn:aws:ec2:*::snapshot/*",
+                "arn:aws:ec2:*:599151311607:key-pair/*",
+                "arn:aws:ec2:*:599151311607:launch-template/*",
+                "arn:aws:ec2:*:599151311607:security-group/*",
+                "arn:aws:ec2:*:599151311607:network-interface/*",
+                "arn:aws:ec2:*:599151311607:capacity-reservation/*",
+                "arn:aws:resource-groups:*:599151311607:group/*",
+                "arn:aws:license-manager:*:599151311607:license-configuration:*",
+                "arn:aws:ec2:*:599151311607:instance/*",
+                "arn:aws:ec2:*::image/*",
+                "arn:aws:eks:*:599151311607:cluster/*"
+            ]
+        },
+        {
+            "Sid": "VisualEditor3",
+            "Effect": "Allow",
+            "Action": [
+                "ec2:DeleteLaunchTemplate",
+                "ec2:DeleteLaunchTemplateVersions",
+                "eks:DescribeAddon"
+            ],
+            "Resource": [
+                "arn:aws:ec2:*:599151311607:launch-template/*",
+                "arn:aws:eks:*:599151311607:addon/*/*/*"
+            ]
+        },
+        {
+            "Sid": "VisualEditor4",
+            "Effect": "Allow",
+            "Action": "eks:CreateNodegroup",
+            "Resource": "arn:aws:eks:*:599151311607:cluster/*"
+        },
+        {
+            "Sid": "VisualEditor5",
+            "Effect": "Allow",
+            "Action": "eks:DescribeNodegroup",
+            "Resource": "arn:aws:eks:*:599151311607:nodegroup/*/*/*"
+        },
+        {
+            "Sid": "VisualEditor6",
+            "Effect": "Allow",
+            "Action": "eks:CreateAddon",
+            "Resource": "arn:aws:eks:*:599151311607:cluster/*"
+        },
+        {
+            "Sid": "VisualEditor7",
+            "Effect": "Allow",
+            "Action": "eks:DeleteNodegroup",
+            "Resource": "arn:aws:eks:*:599151311607:nodegroup/*/*/*"
+        },
+        {
+            "Sid": "VisualEditor8",
+            "Effect": "Allow",
+            "Action": "eks:DeleteAddon",
+            "Resource": "arn:aws:eks:*:599151311607:addon/*/*/*"
+        }
+    ]
+}
