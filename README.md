@@ -36,10 +36,10 @@ cluster.
 
 ### Solution
 
-1.  For creating a VPC with single public subnet, VPC module is used. [VPC Docs](https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html). [VPC Module Docs](https://registry.terraform.io/modules/terraform-aws-modules/vpc/aws/latest).
+1.  For creating a VPC with a single public subnet, a VPC module is used. [VPC Docs](https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html). [VPC Module Docs](https://registry.terraform.io/modules/terraform-aws-modules/vpc/aws/latest).
 
 Challenges and explanations
-- When you create a cluster, you need to specify a VPC and at least two subnets that are in different Availability Zones. [Docs](https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html).
+- When creating a cluster, you need to specify a VPC and at least two subnets in different Availability Zones. [Docs](https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html).
 
 `azs             = ["eu-central-1a", "eu-central-1b"]  # Specify subnets from two different AZs`
 
@@ -49,10 +49,10 @@ Challenges and explanations
 
 `map_public_ip_on_launch = true`
 
-2.  For creating a EKS cluster within the VPC, EKS module is used. [VPC Docs](https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html). [VPC Module Docs](https://registry.terraform.io/modules/terraform-aws-modules/eks/aws/latest).
+2.  For creating an EKS cluster within the VPC, the EKS module is used. [VPC Docs](https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html). [VPC Module Docs](https://registry.terraform.io/modules/terraform-aws-modules/eks/aws/latest).
 
 Challenges and explanations
-- Enbale all the available logs from the control plane for better troubleshouting the applications.
+- Enable all the available logs from the control plane for better troubleshooting the applications.
 
 `  cluster_enabled_log_types = [
     "audit",
@@ -62,15 +62,15 @@ Challenges and explanations
     "scheduler"
   ]`
 
-- My choice of EC2 instance type is t2.micro, as it is a part of a free tier. 
+- My choice of EC2 instance type is t2.micro, as it is part of a free tier. 
 
-- I use EKS managed node instead of self-managed, because it simplifies the management and scaling of worker nodes in an EKS cluster, reducing operational overhead and allowing you to focus more on your applications. While in comparison to fargate, Using AWS EKS managed node groups provides more control and flexibility over the underlying infrastructure, enabling advanced customization options and allowing direct access to EC2 instances within the EKS cluster.
+- I use EKS managed node instead of self-managed, because it simplifies the management and scaling of worker nodes in an EKS cluster, reducing operational overhead and allowing you to focus more on your applications. While in comparison to Fargate, Using AWS EKS-managed node groups provides more control and flexibility over the underlying infrastructure, enabling advanced customization options and allowing direct access to EC2 instances within the EKS cluster.
 
-- My desired size of EKS managed node group is 2, because 1 node of a type t2.micro is not enough for system and space-beacon application pods. In this situation, the best practice it to use a node autoscaler. [Karpenter Docs](https://karpenter.sh/docs/).
+- My desired size of the EKS managed node group is 2 because 1 node of a type t2.micro is insufficient for system and space-beacon application pods. In this situation, the best practice is to use node autoscaling. [Karpenter Docs](https://karpenter.sh/docs/).
 
 - Note, this k8s cluster setup is not production ready. It is used only for development purposes. To make it production ready, add at least:
   - Three worker nodes from different availability zones.
-  - Configured monitoring with Prometheus, Alertmanager and Grafana.
+  - Configured monitoring with Prometheus, Alertmanager, and Grafana.
 
 
 3. Security groups and IAM roles for security measurements are deployed within the EKS module.
@@ -78,7 +78,7 @@ Challenges and explanations
 4. In order to output the EKS cluster kubeconfig, eks-kubeconfig module is used. [Eks-kubeconfig Module Docs](https://registry.terraform.io/modules/hyperbadger/eks-kubeconfig/aws/latest) 
 
 Challenges and explanations
-- Module eks-kubeconfig should run after the completion of EKS module.
+- Module eks-kubeconfig should run after the completion of the EKS module.
 
 `depends_on = [module.eks]`
 
@@ -91,22 +91,22 @@ Challenges and explanations
 
 2. Create a user group "terraform" in AWS IAM. [The Docs](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_groups_create.html). 
 
-*` As a best practice, AWS recommend attaching policies to a group instead of Attach a managed policy directly to a user. Then, add the user to the appropriate group. `*
+*` As a best practice, AWS recommends attaching policies to a group instead of attaching a managed policy directly to a user. Then, add the user to the appropriate group. `*
 
 3. Assign the needed permissions to the user group "terraform". 
 
-- Attach AWS managed policies:
+- Attach AWS-managed policies:
     - CloudWatchLogsFullAccess
     - IAMFullAccess
     - AWSKeyManagementServicePowerUser
     - AmazonVPCFullAccess
     - AmazonEKSClusterPolicy
 
-- Create inline policy. JSON is [here](policies/eksCreateCluster.json). *Replace 599151311607 with your Account ID*.
+- Create an inline policy. JSON is [here](policies/eksCreateCluster.json). *Replace 599151311607 with your Account ID*.
 
-4. Create a user "terraform" in AWS IAM and add user to an existing "terraform" user group. [The Docs](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html).
+4. Create a user "terraform" in AWS IAM and add the user to an existing "terraform" user group. [The Docs](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html).
 
-5. Create access key for user "terraform". [Docs](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html).
+5. Create an access key for user "terraform". [Docs](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html).
 
 6. Clone the mission control center repository: git clone https://github.com/your-username/devops-galactic-mission.git
 
@@ -148,14 +148,14 @@ AWS ECR, Google Container Registry).
 
 ### Solution
 
-1.  I created a simple application on python without any frameworks.
+1.  I created a simple application in Python without any frameworks.
 2. The lightweight Dockerfile is created. [Best practices Docs](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/).
 
 Challenges and explanations
-- I used a lightweight official docker image with python. Also a specific tag is used instead of the lastest.
-- I tried to add a nonrootuser for the security measurements, but it caused an error. The main reason is that python app is attempting to bind to port 80, which requires root privileges.
-- I did not use a multistaging in this case, because it will not affect to the size of an image.
-- Additionally the vulnerability and best practices image scanner is used. [Dockle](https://github.com/goodwithtech/dockle)
+- I used a lightweight official docker image with Python. Also, a specific tag is used instead of the latest.
+- I tried to add a non-root user for the security measurements, but it caused an error. The main reason is that the Python app is attempting to bind to port 80, which requires root privileges.
+- I did not use a multistage in this case, because it will not affect to the size of an image.
+- Additionally, the vulnerability and best practices image scanner is used. [Dockle](https://github.com/goodwithtech/dockle)
 
 3. AWS ECR with a private repository is used as a main container registry. It is created via terraform module ecr. [AWS ECR Docs](https://docs.aws.amazon.com/AmazonECR/latest/userguide/what-is-ecr.html). [ECR Module Docs](https://registry.terraform.io/modules/terraform-aws-modules/ecr/aws/latest).
 
@@ -164,7 +164,7 @@ Challenges and explanations
 
 2. Install AWS CLI. [Installation Docs](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
 
-3. Create an access key for your account. IT is not recommended to do it for the root user. MAke sure your user has the needed permissions. [Docs](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/aws-build).
+3. Create an access key for your account. It is not recommended to do it for the root user. Make sure your user has the needed permissions. [Docs](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/aws-build).
 
 4. Configure your profile in AWS CLI. [Configuring Docs](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html).
 
@@ -226,23 +226,23 @@ This chart contains the following templates:
 - service
 - serviceaccount
 
-The only thing we need to change is values file
+The only thing we need to change is the values file
 
 Note, this helm release is not production ready. It is used only for development purposes. To make it production ready, add at least:
 - Three pod replicas.
 - Configure Pod Distribution Budget.
 - Configure PodAntiAffinity.
-- Enable ingress with Cloudflare in order to securely expose application to the internet.
+- Enable ingress with Cloudflare in order to securely expose applications to the internet.
 - Enable hpa for pod autoscaling.
 - Configure [KEDA](https://keda.sh/).
-- Configure additional monitoring and alerting with Prometheus, Alertmanager and Grafana. 
+- Configure additional monitoring and alerting with Prometheus, Alertmanager, and Grafana. 
 - Configure continuous logging with ELK.
 
 ### Steps
 
 1. Install helm. [Installation Docs](https://helm.sh/docs/intro/install/).
 
-2. Add kubeconfig of your cluster to ~/.kube/config. *remove the <<EOT EOT from the file*. The kubeconfig is ouputed in the previous task.
+2. Add kubeconfig of your cluster to ~/.kube/config. *remove the <<EOT EOT from the file*. The kubeconfig is outputted in the previous task.
 
 3. Navigate to the helm directory.
 
@@ -252,7 +252,7 @@ Note, this helm release is not production ready. It is used only for development
 
 `helm upgrade app ./space-beacon --install -n space --create-namespace --set image.repository=<your account id>.dkr.ecr.eu-central-1.amazonaws.com/private-force --set image.tag=0.1.0`  
 
-5. Check the funcionality of an application. Wait until the pod is running. 
+5. Check the functionality of an application. Wait until the pod is running. 
 
 `kubectl exec <your pod name> -n space -- wget -qO- http://127.0.0.1`
 
@@ -268,7 +268,7 @@ The tasks were well-structured and covered crucial aspects of a deployment. Crea
 
 The challenge also emphasized the importance of best practices, including security measures, efficiency, and scalability. This knowledge will undoubtedly be valuable in real-world scenarios, where adhering to best practices is vital for successful deployments.
 
-Another important thing is that the mission does not restict the Space Engineers to use or add any additional tools. Engineers are free to add CI/CD, Karpenter and even expose the application to the internet. 
+Another important thing is that the mission does not restrict the Space Engineers to use or add any additional tools. Engineers are free to add CI/CD, Karpenter, and even expose the application to the internet. 
 
 Overall, I thoroughly enjoyed the time spent on this mission and found it to be an engaging and educational experience. It has further solidified my interest in DevOps and my desire to continue learning and growing in this field.
 
