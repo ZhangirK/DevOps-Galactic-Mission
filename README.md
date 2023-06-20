@@ -9,6 +9,8 @@ I have carefully documented my journey and made sure to address any potential di
 
 I hope you find this guide enjoyable and informative. May your mission be a resounding success, and may the force of DevOps be with you!
 
+---
+
 ## Table of Contents
 
 1. [Mission Brief](#mission-brief)
