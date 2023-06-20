@@ -9,6 +9,8 @@ I have carefully documented my journey and made sure to address any potential di
 
 I hope you find this guide enjoyable and informative. May your mission be a resounding success, and may the force of DevOps be with you!
 
+---
+
 ## Mission Brief
 
 Greetings, Space Engineer! Welcome to the DevOps Galactic Mission: Operation Terraform. Your mission is to establish a Kubernetes outpost in your personal AWS Galaxy using Terraform and deploy the crucial "Space Beacon" microservice using Helm.
