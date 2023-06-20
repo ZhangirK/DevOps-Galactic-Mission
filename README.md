@@ -48,8 +48,9 @@ public_subnets  = ["10.0.0.0/24", "10.0.1.0/24"]      # Specify subnets from two
 ```
 
 - Enable auto-assigning public IP addresses to EC2 instances.
-
-`map_public_ip_on_launch = true`
+```
+map_public_ip_on_launch = true
+```
 
 2.  For creating an EKS cluster within the VPC, the EKS module is used. [VPC Docs](https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html). [VPC Module Docs](https://registry.terraform.io/modules/terraform-aws-modules/eks/aws/latest).
 
@@ -84,11 +85,15 @@ Challenges and explanations
 Challenges and explanations
 - Module eks-kubeconfig should run after the completion of the EKS module.
 
-`depends_on = [module.eks]`
+```
+depends_on = [module.eks]
+```
 
 - It is required to secure our kubeconfig output. Kubeconfig is not displayed in the console or stored in the Terraform state file. Either there will be an error.
 
-`sensitive = true`
+```
+sensitive = true
+```
 
 ### Steps
 1. Install terraform. [The Docs](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli).
@@ -130,15 +135,21 @@ cd $PATH/DevOpsGalacticMission/terraform  #replace $PATH with the location of th
 
 9. Initialize the terraform directory.
 
-`terraform init`
+```
+terraform init
+```
 
 10. Create infrastructure.
 
-`terraform apply --auto-approve`
+```
+terraform apply --auto-approve
+```
 
 11. Redirect kubeconfig to the file.
 
-`terraform output kubeconfig > kubeconfig`
+```
+terraform output kubeconfig > kubeconfig
+```
 
 ---
 
@@ -204,11 +215,15 @@ aws ecr get-login-password --region eu-central-1 | sudo docker login --username 
 
 8. Build the image.
 
-`sudo docker build -t your_aws_account_id.dkr.ecr.eu-central-1.amazonaws.com/private-force:0.1.0 .`
+```
+sudo docker build -t your_aws_account_id.dkr.ecr.eu-central-1.amazonaws.com/private-force:0.1.0 .
+```
 
 9. Push the image.
 
-`sudo docker push your_aws_account_id.dkr.ecr.eu-central-1.amazonaws.com/private-force:0.1.0`
+```
+sudo docker push your_aws_account_id.dkr.ecr.eu-central-1.amazonaws.com/private-force:0.1.0
+```
 
 ---
 
@@ -229,7 +244,9 @@ A custom Helm is created for this task. [Helm Docs](https://helm.sh/docs/).
 
 Command to create a custom Helm chart automatically
 
-`helm create space-beacon` 
+```
+helm create space-beacon
+```
 
 This chart contains the following templates:
 - deployment
@@ -258,15 +275,21 @@ Note, this helm release is not production ready. It is used only for development
 
 3. Navigate to the helm directory.
 
-`cd $PATH/DevOpsGalacticMission/helm` // replace $PATH with the location of the repository
+```
+cd $PATH/DevOpsGalacticMission/helm  #replace $PATH with the location of the repository
+```
 
 4. Install a new release to your k8s cluster.
 
-`helm upgrade app ./space-beacon --install -n space --create-namespace --set image.repository=<your account id>.dkr.ecr.eu-central-1.amazonaws.com/private-force --set image.tag=0.1.0`  
+```
+helm upgrade app ./space-beacon --install -n space --create-namespace --set image.repository=<your account id>.dkr.ecr.eu-central-1.amazonaws.com/private-force --set image.tag=0.1.0
+```
 
 5. Check the functionality of an application. Wait until the pod is running. 
 
-`kubectl exec <your pod name> -n space -- wget -qO- http://127.0.0.1`
+```
+kubectl exec <your pod name> -n space -- wget -qO- http://127.0.0.1
+```
 
 ---
 
