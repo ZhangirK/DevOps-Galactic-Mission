@@ -132,7 +132,11 @@ sensitive = true
 
 5. Create an access key for user "terraform". [Docs](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html).
 
-6. Clone the mission control center repository: git clone https://github.com/your-username/devops-galactic-mission.git
+6. Clone the mission control center repository.
+
+```
+ git clone https://github.com/ZhangirK/DevOps-Galactic-Mission.git
+```
 
 7. Use your IAM credentials to authenticate the Terraform AWS provider. Set access key [Docs](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/aws-build).
 
