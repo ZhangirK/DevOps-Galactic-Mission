@@ -38,7 +38,7 @@ cluster.
 
 1.  For creating a VPC with a single public subnet, a VPC module is used. [VPC Docs](https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html). [VPC Module Docs](https://registry.terraform.io/modules/terraform-aws-modules/vpc/aws/latest).
 
-Challenges and explanations
+####Challenges and explanations
 - When creating a cluster, you need to specify a VPC and at least two subnets in different Availability Zones. [Docs](https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html).
 
 ```
