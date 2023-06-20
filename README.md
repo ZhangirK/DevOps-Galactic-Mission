@@ -162,7 +162,7 @@ export AWS_SECRET_ACCESS_KEY=
 8. Navigate to the terraform directory.
 
 ```
-cd $PATH/DevOpsGalacticMission/terraform  #replace $PATH with the location of the repository 
+cd $PATH/DevOps-Galactic-Mission/terraform  #replace $PATH with the location of the repository 
 ```
 
 9. Initialize the terraform directory.
@@ -236,7 +236,7 @@ Default output format [None]: json
 5. Navigate to the directory with Dockerfile.
 
 ```
-cd $PATH/DevOpsGalacticMission/app  #replace $PATH with the location of the repository
+cd $PATH/DevOps-Galactic-Mission/app  #replace $PATH with the location of the repository
 ```
 
 6. Install Docker. [Installation guide](https://docs.docker.com/engine/install/ubuntu/).
@@ -343,7 +343,7 @@ Note, this helm release is not production ready. It is used only for development
 3. Navigate to the helm directory.
 
 ```
-cd $PATH/DevOpsGalacticMission/helm  #replace $PATH with the location of the repository
+cd $PATH/DevOps-Galactic-Missionn/helm  #replace $PATH with the location of the repository
 ```
 
 4. Install a new release to your k8s cluster.
