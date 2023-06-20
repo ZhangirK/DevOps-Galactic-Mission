@@ -9,6 +9,15 @@ I have carefully documented my journey and made sure to address any potential di
 
 I hope you find this guide enjoyable and informative. May your mission be a resounding success, and may the force of DevOps be with you!
 
+## Table of Contents
+
+1. [Mission Brief](#mission-brief)
+2. [Mission Tools](#mission-tools)
+3. [Task 1: Terraform - Establishing the Outpost](#task-1)
+4. [Task 2: Docker - Building the Space Beacon](#task-2)
+5. [Task 3: Helm - Deploying the Space Beacon](#task-3)
+6. [Feedback](#feedback)
+
 ---
 
 ## Mission Brief
@@ -34,7 +43,9 @@ then deploy a "Space Beacon" microservice using Helm.
 
 ---
 
-## Task 1: Terraform - Establishing the Outpost
+## Task 1
+
+Terraform - Establishing the Outpost
 
 ### Description
 
@@ -172,7 +183,9 @@ terraform output kubeconfig > kubeconfig
 
 ---
 
-## Task 2: Docker - Building the Space Beacon
+## Task 2
+
+Docker - Building the Space Beacon
 
 ### Description
 
@@ -248,7 +261,9 @@ sudo docker push your_aws_account_id.dkr.ecr.eu-central-1.amazonaws.com/private-
 
 ---
 
-## Task 3: Helm - Deploying the Space Beacon
+## Task 3
+
+Helm - Deploying the Space Beacon
 
 ### Description
 With the Space Beacon ready, it's time to deploy. Create a Helm chart for the application. This
