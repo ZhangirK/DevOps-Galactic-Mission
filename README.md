@@ -355,7 +355,9 @@ helm upgrade app ./space-beacon --install -n space --create-namespace --set imag
 5. Check the functionality of an application. Wait until the pod is running. 
 
 ```
-kubectl exec <your pod name> -n space -- wget -qO- http://127.0.0.1
+kubectl port-forward -n space service/app-space-beacon 8080:80 &  #port-forward the service in the background
+
+curl localhost:8080  #curl the app
 ```
 
 ---
