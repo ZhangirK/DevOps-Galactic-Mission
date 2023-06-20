@@ -95,7 +95,7 @@ Challenges and explanations
 
 2. Create a user group "terraform" in AWS IAM. [The Docs](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_groups_create.html). 
 
-*` As a best practice, AWS recommends attaching policies to a group instead of attaching a managed policy directly to a user. Then, add the user to the appropriate group. `*
+* As a best practice, AWS recommends attaching policies to a group instead of attaching a managed policy directly to a user. Then, add the user to the appropriate group.*
 
 3. Assign the needed permissions to the user group "terraform". 
 
@@ -116,15 +116,17 @@ Challenges and explanations
 
 7. Use your IAM credentials to authenticate the Terraform AWS provider. Set access key [Docs](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/aws-build).
 
-`export AWS_ACCESS_KEY_ID=`
+```
+export AWS_ACCESS_KEY_ID=
 
-and secret key
-
-`export AWS_SECRET_ACCESS_KEY=`
+export AWS_SECRET_ACCESS_KEY=
+```
 
 8. Navigate to the terraform directory.
 
-`cd $PATH/DevOpsGalacticMission/terraform` // replace $PATH with the location of the repository 
+```
+cd $PATH/DevOpsGalacticMission/terraform  #replace $PATH with the location of the repository 
+```
 
 9. Initialize the terraform directory.
 
@@ -186,13 +188,17 @@ Default output format [None]: json
 
 5. Navigate to the directory with Dockerfile.
 
-`cd $PATH/DevOpsGalacticMission/app` // replace $PATH with the location of the repository
+```
+cd $PATH/DevOpsGalacticMission/app  #replace $PATH with the location of the repository
+```
 
 6. Install Docker. [Installation guide](https://docs.docker.com/engine/install/ubuntu/).
 
 7. Authenticate your Docker client to the Amazon ECR registry to which you intend to push your image.
 
-`aws ecr get-login-password --region eu-central-1 | sudo docker login --username AWS --password-stdin your_aws_account_id.dkr.ecr.eu-central-1.amazonaws.com`
+```
+aws ecr get-login-password --region eu-central-1 | sudo docker login --username AWS --password-stdin your_aws_account_id.dkr.ecr.eu-central-1.amazonaws.com
+```
 
 *Do not run the aws command with sudo!*
 
