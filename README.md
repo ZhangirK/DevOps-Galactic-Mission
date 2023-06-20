@@ -30,7 +30,7 @@ then deploy a "Space Beacon" microservice using Helm.
 4. AWS EKS: Elastic Kubernetes Service
 5. AWS VPC: Virtual Private Cloud
 6. AWS ECR: Elastic Container Registry
-6. GitHub repository: Mission control center
+7. GitHub repository: Mission control center
 
 ---
 
@@ -51,6 +51,7 @@ cluster.
 1.  For creating a VPC with a single public subnet, a VPC module is used. [VPC Docs](https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html). [VPC Module Docs](https://registry.terraform.io/modules/terraform-aws-modules/vpc/aws/latest).
 
 #### Challenges and explanations
+
 - When creating a cluster, you need to specify a VPC and at least two subnets in different Availability Zones. [Docs](https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html).
 
 ```
@@ -95,6 +96,7 @@ map_public_ip_on_launch = true
 4. In order to output the EKS cluster kubeconfig, eks-kubeconfig module is used. [Eks-kubeconfig Module Docs](https://registry.terraform.io/modules/hyperbadger/eks-kubeconfig/aws/latest) 
 
 #### Challenges and explanations
+
 - Module eks-kubeconfig should run after the completion of the EKS module.
 
 ```
@@ -108,6 +110,7 @@ sensitive = true
 ```
 
 ### Steps
+
 1. Install terraform. [The Docs](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli).
 
 2. Create a user group "terraform" in AWS IAM. [The Docs](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_groups_create.html). 
@@ -190,6 +193,7 @@ AWS ECR, Google Container Registry).
 3. AWS ECR with a private repository is used as a main container registry. It is created via terraform module ecr. [AWS ECR Docs](https://docs.aws.amazon.com/AmazonECR/latest/userguide/what-is-ecr.html). [ECR Module Docs](https://registry.terraform.io/modules/terraform-aws-modules/ecr/aws/latest).
 
 ### Steps
+
 1. AWS ECR private repository is already deployed via terraform in Task 1. 
 
 2. Install AWS CLI. [Installation Docs](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
