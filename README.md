@@ -205,7 +205,7 @@ AWS ECR, Google Container Registry).
 #### Challenges and explanations
 
 - I used a lightweight official docker image with Python. Also, a specific tag is used instead of the latest.
-- I tried to add a non-root user for the security measurements, but it caused an error. The main reason is that the Python app is attempting to bind to port 80, which requires root privileges.
+- I added a non-root user for the security measurements. That is the reason I set the application port to 8080. Port 80 requires root priveleges to expose. However, in the next task my k8s service exposes 80 port.  
 - I did not use a multistage in this case, because it will not affect to the size of an image.
 - Additionally, the vulnerability and best practices image scanner is used. [Dockle](https://github.com/goodwithtech/dockle)
 
@@ -293,7 +293,36 @@ This chart contains the following templates:
 - service
 - serviceaccount
 
-The only thing we need to change is the values file
+I also changed deployment.yaml, service.yaml and values file. 
+
+deployment.yaml: 
+
+```
+ports:
+  - name: http
+    containerPort: {{ .Values.service.targetPort }}  #add an ability to customize the port
+    protocol: TCP
+```
+
+service.yaml:
+
+```
+ports:
+  - port: {{ .Values.service.port }}
+    targetPort: {{ .Values.service.targetPort }}  #add an ability to customize the port. The same as deployment port 
+    protocol: TCP
+    name: http
+```
+
+values file:
+
+```
+image:
+  repository: 599151311607.dkr.ecr.eu-central-1.amazonaws.com/private-force  #the needed image repo
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "0.1.0"
+```
 
 Note, this helm release is not production ready. It is used only for development purposes. To make it production ready, add at least:
 - Three pod replicas.

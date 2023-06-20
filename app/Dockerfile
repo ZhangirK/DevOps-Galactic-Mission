@@ -8,14 +8,14 @@ WORKDIR /app
 COPY app.py .
 
 #create a non-root user and Set the ownership of the application directory to the non-root user
-#RUN adduser -D nonrootuser \
-#    && chown -R nonrootuser:nonrootuser /app
+RUN adduser -D nonrootuser \
+    && chown -R nonrootuser:nonrootuser /app
 
 # Switch to the non-root user
-#USER nonrootuser
+USER nonrootuser
 
 #Expose port 80
-EXPOSE 80
+EXPOSE 8080
 
 # Set the command to run the application
 ENTRYPOINT ["python", "app.py"]
