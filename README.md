@@ -1,9 +1,19 @@
 # DevOps Galactic Mission: Operation Terraform
 *Author: [Zhangir Kapishov](https://www.linkedin.com/in/zhangir-kapishov/)*
 
+Welcome!
+
+This repository is your gateway to the DevOps Galactic Mission. Here, you will find all the necessary resources and instructions to successfully complete the mission. Follow the steps and details provided below to reproduce my solution and embark on your own interstellar adventure.
+
+I have carefully documented my journey and made sure to address any potential difficulties you may encounter along the way. Rest assured, my guide is designed to help you navigate through the mission smoothly and without any major obstacles.
+
+I hope you find this guide enjoyable and informative. May your mission be a resounding success, and may the force of DevOps be with you!
+
 ## Mission Brief
 
 Greetings, Space Engineer! Welcome to the DevOps Galactic Mission: Operation Terraform. Your mission is to establish a Kubernetes outpost in your personal AWS Galaxy using Terraform and deploy the crucial "Space Beacon" microservice using Helm.
+
+### Objective
 
 Your objective is to deploy a Kubernetes cluster in your personal AWS Galaxy (account), and
 then deploy a "Space Beacon" microservice using Helm.
@@ -54,7 +64,7 @@ map_public_ip_on_launch = true
 
 2.  For creating an EKS cluster within the VPC, the EKS module is used. [VPC Docs](https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html). [VPC Module Docs](https://registry.terraform.io/modules/terraform-aws-modules/eks/aws/latest).
 
-Challenges and explanations
+#### Challenges and explanations
 - Enable all the available logs from the control plane for better troubleshooting the applications.
 
 ```
@@ -82,7 +92,7 @@ Challenges and explanations
 
 4. In order to output the EKS cluster kubeconfig, eks-kubeconfig module is used. [Eks-kubeconfig Module Docs](https://registry.terraform.io/modules/hyperbadger/eks-kubeconfig/aws/latest) 
 
-Challenges and explanations
+#### Challenges and explanations
 - Module eks-kubeconfig should run after the completion of the EKS module.
 
 ```
@@ -168,7 +178,8 @@ AWS ECR, Google Container Registry).
 1.  I created a simple application in Python without any frameworks.
 2. The lightweight Dockerfile is created. [Best practices Docs](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/).
 
-Challenges and explanations
+#### Challenges and explanations
+
 - I used a lightweight official docker image with Python. Also, a specific tag is used instead of the latest.
 - I tried to add a non-root user for the security measurements, but it caused an error. The main reason is that the Python app is attempting to bind to port 80, which requires root privileges.
 - I did not use a multistage in this case, because it will not affect to the size of an image.
