@@ -41,9 +41,11 @@ cluster.
 Challenges and explanations
 - When creating a cluster, you need to specify a VPC and at least two subnets in different Availability Zones. [Docs](https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html).
 
-`azs             = ["eu-central-1a", "eu-central-1b"]  # Specify subnets from two different AZs`
+```
+azs             = ["eu-central-1a", "eu-central-1b"]  # Specify subnets from two different AZs
 
-`public_subnets  = ["10.0.0.0/24", "10.0.1.0/24"]      # Specify subnets from two different AZs`
+public_subnets  = ["10.0.0.0/24", "10.0.1.0/24"]      # Specify subnets from two different AZs
+```
 
 - Enable auto-assigning public IP addresses to EC2 instances.
 
@@ -54,13 +56,15 @@ Challenges and explanations
 Challenges and explanations
 - Enable all the available logs from the control plane for better troubleshooting the applications.
 
-`  cluster_enabled_log_types = [
+```
+  cluster_enabled_log_types = [
     "audit",
     "api",
     "authenticator",
     "controllerManager",
     "scheduler"
-  ]`
+  ]
+```
 
 - My choice of EC2 instance type is t2.micro, as it is part of a free tier. 
 
@@ -168,15 +172,17 @@ Challenges and explanations
 
 4. Configure your profile in AWS CLI. [Configuring Docs](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html).
 
-`aws configure`
+```
+aws configure
 
-`AWS Access Key ID [None]: AKIAIOSFODNN7EXAMPLE`
+AWS Access Key ID [None]: AKIAIOSFODNN7EXAMPLE
 
-`AWS Secret Access Key [None]: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY`
+AWS Secret Access Key [None]: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
 
-`Default region name [None]: eu-central-1`
+Default region name [None]: eu-central-1
 
-`Default output format [None]: json`
+Default output format [None]: json
+```
 
 5. Navigate to the directory with Dockerfile.
 
